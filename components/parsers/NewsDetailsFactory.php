@@ -2,6 +2,7 @@
 namespace App\Components\Parsers;
 
 use App\Components\Parsers\Jelonka\DetailsParserJelonka;
+use App\Components\Parsers\Models\SingleNews;
 
 class NewsDetailsFactory
 {
@@ -10,16 +11,17 @@ class NewsDetailsFactory
   /**
    * Returns object SingleNews from requested site
    * @param string $site
-   * @return array
+   * @param string $url to parse details
+   * @return SingleNews
    */
-  public static function create($site) : string {
+  public static function create($site, $url) : SingleNews {
     switch ($site) {
       case self::SITE_JELONKA:
         $parser = new DetailsParserJelonka();
-        $news = $parser->parse();
+        $news = $parser->parse($url);
         break;
       default:
-        $news = [];
+        $news = null;
     }
     return $news;
   }

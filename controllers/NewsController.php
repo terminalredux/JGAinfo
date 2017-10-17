@@ -32,14 +32,13 @@ class NewsController extends Controller
   }
 
   /**
-   * @param string $site
+   * @param string $site key
    */
   public function actionDetails($site) {
     if ($this->isPost()) {
       $this->view->site = $site;
-      $this->view->list = NewsDetailsFactory::create($site);
-      var_dump($this->view->list);die;
-      // $_POST['details_url'];
+      $this->view->news = NewsDetailsFactory::create($site, $_POST['details_url']);
+
       $this->view->render('news/details');
     }
   }
