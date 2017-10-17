@@ -1,0 +1,14 @@
+{
+  "name": "jgainfo",
+  "description": "",
+  "main": "",
+  "authors": [
+    "isosub5"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "font-awesome": "^4.7.0"
+  }
+}
