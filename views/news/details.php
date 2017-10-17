@@ -1,5 +1,6 @@
 <h3><strong><?= $this->site ?></strong></h3>
-<?= $this->news->getTitle() ?>
-<?= $this->news->getPubDateTime() ?>
-<?= $this->news->getContent() ?>
-<?= $this->news->getAuthor() ?>
+<h1><?= $this->news->getTitle() ?></h1>
+<strong><?= $this->news->getPubDateTime() ?></strong>
+<small><?= $this->news->getAuthor() ?></small>
+<br><br>
+<p><?= $this->news->getContent() ?></p>

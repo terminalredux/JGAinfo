@@ -21,7 +21,7 @@ class NewsDetailsFactory
         $news = $parser->parse($url);
         break;
       default:
-        $news = null;
+        $news = null; // should throw an error 1!!!!
     }
     return $news;
   }

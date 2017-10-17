@@ -38,8 +38,11 @@ class NewsController extends Controller
     if ($this->isPost()) {
       $this->view->site = $site;
       $this->view->news = NewsDetailsFactory::create($site, $_POST['details_url']);
-
-      $this->view->render('news/details');
+      if (!is_null($this->view->news)) {
+        $this->view->render('news/details');
+      } else {
+          (new ErrorController)->newsSiteNotFound($site);
+      }
     }
   }
 
