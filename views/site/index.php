@@ -33,4 +33,4 @@ echo implode('<br><br>', $textContent);
 
 
 ?>
-<h1>Witamy na stronie!</h1>
+<h1>Witamy na stronie !</h1>
