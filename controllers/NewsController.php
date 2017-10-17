@@ -5,6 +5,7 @@ use Libs\Base\Controller;
 use App\Controllers\SiteController;
 use App\Controllers\ErrorController;
 use App\Components\Parsers\NewsListFactory;
+use App\Components\Parsers\NewsDetailsFactory;
 
 class NewsController extends Controller
 {
@@ -36,6 +37,8 @@ class NewsController extends Controller
   public function actionDetails($site) {
     if ($this->isPost()) {
       $this->view->site = $site;
+      $this->view->list = NewsDetailsFactory::create($site);
+      var_dump($this->view->list);die;
       // $_POST['details_url'];
       $this->view->render('news/details');
     }
