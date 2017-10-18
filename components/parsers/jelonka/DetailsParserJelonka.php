@@ -13,6 +13,7 @@ class DetailsParserJelonka extends AbstractDetailsParser
   private const XPATH_PUBDATETIME = "//div[@class='wiadomosci-data']/strong";
   private const XPATH_UPDATEDATETIME = "//div[@class='wiadomosci-data'][1]";
   private const XPATH_AUTHOR = "//span[@class='autor']/span/strong";
+  private const XPATH_MAINPHOTO = "//img[@class='wiadomosc-img']/@src";
 
   private $xPath;
   private $news;
@@ -50,11 +51,25 @@ class DetailsParserJelonka extends AbstractDetailsParser
   }
 
   /**
-   * @inheritdoc
+   * Optional element to parse
+   * Used in superclass template method parse($url, $flags)
+   * Parse and sets SingleNews author
    */
   protected function parseAuthor() : void {
     $author = $this->xPath->query(self::XPATH_AUTHOR);
     $this->news->setAuthor($author[0]->nodeValue);
+  }
+
+  /**
+   * Optional element to parse. Check if in news there is a main photo
+   * Used in superclass template method parse($url, $flags)
+   * Parse and sets SingleNews mainPhoto
+   */
+  protected function parseMainPhoto() : void {
+    if ($this->xPath->evaluate(self::XPATH_MAINPHOTO)->length) {
+      $mainPhoto = $this->xPath->query(self::XPATH_MAINPHOTO);
+      $this->news->setMainPhoto($mainPhoto[0]->nodeValue);
+    }
   }
 
   /**

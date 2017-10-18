@@ -36,11 +36,14 @@ abstract class AbstractDetailsParser
 
 		if (in_array(self::FLAG_AUTHOR, $flags)) {
 			$this->parseAuthor();
-		} else if (in_array(self::FLAG_MAIN_PHOTO, $flags)) {
+		}
+		if (in_array(self::FLAG_MAIN_PHOTO, $flags)) {
+			$this->parseMainPhoto();
+		}
+		if (in_array(self::FLAG_GALLERY, $flags)) {
 
-		} else if (in_array(self::FLAG_GALLERY, $flags)) {
-
-		} else if (in_array(self::FLAG_UPDATE_DATETIME, $flags)) {
+		}
+		if (in_array(self::FLAG_UPDATE_DATETIME, $flags)) {
 
 		}
 		return $this->getNews();
@@ -72,17 +75,11 @@ abstract class AbstractDetailsParser
 	protected abstract function parsePubDateTime() : void;
 
 	/**
-	 * parse and sets SingleNews author
-	 */
-	protected abstract function parseAuthor() : void;
-
-	/**
 	 * Getters && Setters
 	 */
 	protected abstract function getNews() : SingleNews;
 	protected abstract function setNews($news) : void;
 	protected abstract function setXPath($xPath) : void;
-
 
 	/**
    * Change string publication data-time to timestamp

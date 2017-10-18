@@ -20,7 +20,7 @@ class NewsDetailsFactory
     switch ($site) {
       case self::SITE_JELONKA:
         $parser = new Jelonka();
-        $news = $parser->parse($url, [Jelonka::FLAG_AUTHOR]);
+        $news = $parser->parse($url, [Jelonka::FLAG_AUTHOR, Jelonka::FLAG_MAIN_PHOTO]);
         break;
       default:
         $news = null; //TODO should throw an error !!!

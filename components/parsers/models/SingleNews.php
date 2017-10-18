@@ -9,46 +9,55 @@ class SingleNews
   //private $updateDateTime;
   private $author;
   private $sourceLink;
-  //private $mainPhoto;
+  private $mainPhoto;
   //private $photos;
+  //private ??? next object ???
 
-  public function getTitle() {
+  public function getTitle() : string {
     return $this->title;
   }
 
-  public function getContent() {
+  public function getContent() : string {
     return $this->content;
   }
 
-  public function getPubDateTime() {
+  public function getPubDateTime() : int {
     return $this->pubDateTime;
   }
 
-  public function getAuthor() {
+  public function getAuthor() : string {
     return $this->author;
   }
 
-  public function getSourceLink() {
+  public function getSourceLink() : string {
     return $this->sourceLink;
   }
 
-  public function setTitle($title) {
+  public function getMainPhoto(){
+    return $this->mainPhoto;
+  }
+
+  public function setTitle($title) : void {
     $this->title = $title;
   }
 
-  public function setContent($content) {
+  public function setContent($content) : void {
     $this->content = $content;
   }
 
-  public function setPubDateTime($pubDateTime) {
+  public function setPubDateTime($pubDateTime) : void  {
     $this->pubDateTime = $pubDateTime;
   }
 
-  public function setAuthor($author) {
+  public function setAuthor($author) : void {
     $this->author = $author;
   }
 
-  public function setSourceLink($sourceLink) {
+  public function setSourceLink($sourceLink) : void {
     $this->sourceLink = $sourceLink;
+  }
+
+  public function setMainPhoto($mainPhoto) : void {
+    $this->mainPhoto = $mainPhoto;
   }
 }
