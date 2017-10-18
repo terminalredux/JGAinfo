@@ -1,7 +1,7 @@
 <?php
 namespace App\Components\Parsers;
 
-use App\Components\Parsers\Jelonka\DetailsParserJelonka;
+use App\Components\Parsers\Jelonka\DetailsParserJelonka as Jelonka;
 use App\Components\Parsers\Models\SingleNews;
 
 class NewsDetailsFactory
@@ -17,8 +17,8 @@ class NewsDetailsFactory
   public static function create($site, $url) : SingleNews {
     switch ($site) {
       case self::SITE_JELONKA:
-        $parser = new DetailsParserJelonka();
-        $news = $parser->parse($url);
+        $parser = new Jelonka();
+        $news = $parser->parse($url, [Jelonka::FLAG_AUTHOR]);
         break;
       default:
         $news = null; // should throw an error 1!!!!

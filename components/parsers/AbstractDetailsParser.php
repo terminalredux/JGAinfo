@@ -8,16 +8,41 @@ use DomXPath;
 abstract class AbstractDetailsParser
 {
 	/**
+	 * @const Flags to choose elements to parse
+	 */
+	const FLAG_AUTHOR = 1;
+	const FLAG_MAIN_PHOTO = 2;
+	const FLAG_GALLERY = 3;
+	const FLAG_UPDATE_DATETIME = 4;
+
+	/**
+	 * Required parsers: - parseTitle()
+	 *                   - parseContent()
+	 *                   - parsePubDateTime()
+	 * Optional parsers: - parseAuthor()
+	 *                   - parseMainPhoto()
+	 *                   - parseGallery()
+	 *                   - parseUpdateDateTime()
 	 * Template method design pattern
 	 * @param string $url to parse
+	 * @param array $flags to choose elements to parse
    * @return SingleNews
 	 */
-	public final function parse($url) : SingleNews {
+	public final function parse($url, $flags = []) : SingleNews {
 		$this->prepareParser($url);
 		$this->parseTitle();
 		$this->parseContent();
 		$this->parsePubDateTime();
-		$this->parseAuthor();
+
+		if (in_array(self::FLAG_AUTHOR, $flags)) {
+			$this->parseAuthor();
+		} else if (in_array(self::FLAG_MAIN_PHOTO, $flags)) {
+
+		} else if (in_array(self::FLAG_GALLERY, $flags)) {
+
+		} else if (in_array(self::FLAG_UPDATE_DATETIME, $flags)) {
+
+		}
 		return $this->getNews();
 	}
 
@@ -68,7 +93,7 @@ abstract class AbstractDetailsParser
 	 * @param string link to parse
 	 * @return DomXPath (xpath)
 	 */
-	protected function getXPath($link) : DomXPath {
+	private function getXPath($link) : DomXPath {
 		libxml_use_internal_errors(true);
 		$dom = new DomDocument;
 		$dom->loadHTMLFile($link);
