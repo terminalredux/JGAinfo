@@ -1,7 +1,17 @@
 <h3><strong><?= ucfirst($this->site) ?></strong></h3>
 <h1><?= $this->news->getTitle() ?></h1>
-<strong><?= date('d/m/Y H:i', $this->news->getPubDateTime()) ?></strong>
+<strong>
+  <?= date('d/m/Y H:i', $this->news->getPubDateTime()) ?>
+</strong>
+<?php if (!empty($this->news->getUpdateDateTime())): ?>
+  <p>
+    <small>
+      Zaktualizowano: <?= date('d/m/Y H:i', $this->news->getUpdateDateTime()) ?>
+    </small>
+  </p>
+<?php endif; ?>
 <?php if (!empty($this->news->getAuthor())): ?>
+  <br>
   <small><?= $this->news->getAuthor() ?></small>
 <?php endif; ?>
 <br><br>

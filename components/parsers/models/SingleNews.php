@@ -6,7 +6,7 @@ class SingleNews
   private $title;
   private $content;
   private $pubDateTime;
-  //private $updateDateTime;
+  private $updateDateTime;
   private $author;
   private $sourceLink;
   private $mainPhoto;
@@ -37,6 +37,10 @@ class SingleNews
     return $this->mainPhoto;
   }
 
+  public function getUpdateDateTime() {
+    return $this->updateDateTime;
+  }
+
   public function setTitle($title) : void {
     $this->title = $title;
   }
@@ -59,5 +63,9 @@ class SingleNews
 
   public function setMainPhoto($mainPhoto) : void {
     $this->mainPhoto = $mainPhoto;
+  }
+
+  public function setuUpdateDateTime($updateDateTime) {
+    $this->updateDateTime = $updateDateTime;
   }
 }

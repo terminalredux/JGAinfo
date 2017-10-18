@@ -44,7 +44,7 @@ abstract class AbstractDetailsParser
 
 		}
 		if (in_array(self::FLAG_UPDATE_DATETIME, $flags)) {
-
+			$this->parseUpdateDateTime();
 		}
 		return $this->getNews();
 	}
