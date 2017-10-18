@@ -11,7 +11,27 @@ abstract class AbstractDetailsParser
 	 * @param string $url to parse
    * @return SingleNews
 	 */
-	public abstract function parse($url) : SingleNews;
+	public function parse($url) : SingleNews {
+		$this->initParser($url);
+		$this->parseTitle();
+		$this->parseContent();
+		$this->parsePubDateTime();
+		$this->parseAuthor();
+		return $this->getNews();
+	}
+
+	private function initParser($url) {
+		$this->setXPath($this->getXPath($url));
+		$this->setNews(new SingleNews());
+	}
+	protected abstract function parseTitle();
+	protected abstract function parseContent();
+	protected abstract function parsePubDateTime();
+	protected abstract function parseAuthor();
+	protected abstract function getNews();
+	protected abstract function setNews($news);
+	protected abstract function setXPath($xPath);
+
 
 	/**
    * Change string publication data-time to timestamp

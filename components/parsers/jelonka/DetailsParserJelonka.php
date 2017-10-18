@@ -23,29 +23,18 @@ class DetailsParserJelonka extends AbstractDetailsParser
    * @param string $url to parse
    * @return SingleNews
    */
-  public function parse($url) : SingleNews {
-    $this->initParser($url);
-
-    //$updateDateTime = $xpath->query($this->xPaths['XPATH_UPDATEDATETIME']);
-    //ostatnia aktualizacja:
-    //if there is strong "ostatnia aktualizacja:" it means there was an update
-    //trim(explode('ostatnia aktualizacja:', $updateDateTime[0]->nodeValue)[1])
-
-    $this->parseTitle();
-    $this->parseContent();
-    $this->parsePubDateTime();
-    $this->parseAuthor();
-
-    return $this->news;
-  }
-
-  /**
-   *
-   */
-  private function initParser($url) {
-    $this->xPath = $this->getXPath($url);
-    $this->news = new SingleNews();
-  }
+  // public function parse($url) : SingleNews {
+  //   $this->initParser($url);
+  //   //$updateDateTime = $xpath->query($this->xPaths['XPATH_UPDATEDATETIME']);
+  //   //ostatnia aktualizacja:
+  //   //if there is strong "ostatnia aktualizacja:" it means there was an update
+  //   //trim(explode('ostatnia aktualizacja:', $updateDateTime[0]->nodeValue)[1])
+  //   $this->parseTitle();
+  //   $this->parseContent();
+  //   $this->parsePubDateTime();
+  //   $this->parseAuthor();
+  //   return $this->news;
+  // }
 
   /**
    * @inheritdoc
@@ -86,6 +75,20 @@ class DetailsParserJelonka extends AbstractDetailsParser
     $author = $this->xPath->query($this->xPaths['XPATH_AUTHOR']);
     $this->news->setAuthor($author[0]->nodeValue);
   }
+
+  /**
+   *
+   */
+   protected function getNews() {
+     return $this->news;
+   }
+
+   protected  function setNews($news) {
+     $this->news = $news;
+   }
+ 	 protected  function setXPath($xPath) {
+     $this->xPath = $xPath;
+   }
 
   /**
    * @inheritdoc
