@@ -20,26 +20,9 @@ class DetailsParserJelonka extends AbstractDetailsParser
   private $news;
 
   /**
-   * @param string $url to parse
-   * @return SingleNews
-   */
-  // public function parse($url) : SingleNews {
-  //   $this->initParser($url);
-  //   //$updateDateTime = $xpath->query($this->xPaths['XPATH_UPDATEDATETIME']);
-  //   //ostatnia aktualizacja:
-  //   //if there is strong "ostatnia aktualizacja:" it means there was an update
-  //   //trim(explode('ostatnia aktualizacja:', $updateDateTime[0]->nodeValue)[1])
-  //   $this->parseTitle();
-  //   $this->parseContent();
-  //   $this->parsePubDateTime();
-  //   $this->parseAuthor();
-  //   return $this->news;
-  // }
-
-  /**
    * @inheritdoc
    */
-  protected function parseTitle() {
+  protected function parseTitle() : void {
     $title = $this->xPath->query($this->xPaths['XPATH_TITLE']);
     $this->news->setTitle($title[0]->nodeValue);
   }
@@ -47,7 +30,7 @@ class DetailsParserJelonka extends AbstractDetailsParser
   /**
    * @inheritdoc
    */
-  protected function parseContent() {
+  protected function parseContent() : void {
     $content = $this->xPath->query($this->xPaths['XPATH_CONTENT']);
     $textContent = [];
     for ($i = 0; $i <= $content[0]->childNodes->length; $i++) {
@@ -63,7 +46,7 @@ class DetailsParserJelonka extends AbstractDetailsParser
   /**
    * @inheritdoc
    */
-  protected function parsePubDateTime() {
+  protected function parsePubDateTime() : void {
     $pubDateTime = $this->xPath->query($this->xPaths['XPATH_PUBDATETIME']);
     $this->news->setPubDateTime($this->preparePubDateTime($pubDateTime[0]->nodeValue));
   }
@@ -71,22 +54,29 @@ class DetailsParserJelonka extends AbstractDetailsParser
   /**
    * @inheritdoc
    */
-  protected function parseAuthor() {
+  protected function parseAuthor() : void {
     $author = $this->xPath->query($this->xPaths['XPATH_AUTHOR']);
     $this->news->setAuthor($author[0]->nodeValue);
   }
 
   /**
-   *
+   * @inheritdoc
    */
-   protected function getNews() {
+   protected function getNews() : SingleNews {
      return $this->news;
    }
 
-   protected  function setNews($news) {
+   /**
+    * @inheritdoc
+    */
+   protected  function setNews($news) : void {
      $this->news = $news;
    }
- 	 protected  function setXPath($xPath) {
+
+   /**
+    * @inheritdoc
+    */
+ 	 protected  function setXPath($xPath) : void {
      $this->xPath = $xPath;
    }
 

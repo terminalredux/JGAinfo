@@ -8,11 +8,12 @@ use DomXPath;
 abstract class AbstractDetailsParser
 {
 	/**
+	 * Template method design pattern
 	 * @param string $url to parse
    * @return SingleNews
 	 */
-	public function parse($url) : SingleNews {
-		$this->initParser($url);
+	public final function parse($url) : SingleNews {
+		$this->prepareParser($url);
 		$this->parseTitle();
 		$this->parseContent();
 		$this->parsePubDateTime();
@@ -20,17 +21,40 @@ abstract class AbstractDetailsParser
 		return $this->getNews();
 	}
 
-	private function initParser($url) {
+	/**
+	 * @param string $url to parse
+	 */
+	private function prepareParser($url) : void {
 		$this->setXPath($this->getXPath($url));
 		$this->setNews(new SingleNews());
 	}
-	protected abstract function parseTitle();
-	protected abstract function parseContent();
-	protected abstract function parsePubDateTime();
-	protected abstract function parseAuthor();
-	protected abstract function getNews();
-	protected abstract function setNews($news);
-	protected abstract function setXPath($xPath);
+
+	/**
+	 * parse and sets SingleNews title
+	 */
+	protected abstract function parseTitle() : void;
+
+	/**
+	 * parse and sets SingleNews content
+	 */
+	protected abstract function parseContent() : void;
+
+	/**
+	 * parse and sets SingleNews publication date-time
+	 */
+	protected abstract function parsePubDateTime() : void;
+
+	/**
+	 * parse and sets SingleNews author
+	 */
+	protected abstract function parseAuthor() : void;
+
+	/**
+	 * Getters && Setters
+	 */
+	protected abstract function getNews() : SingleNews;
+	protected abstract function setNews($news) : void;
+	protected abstract function setXPath($xPath) : void;
 
 
 	/**
