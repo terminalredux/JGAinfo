@@ -7,6 +7,8 @@ use App\Components\Parsers\Models\SingleNews;
 class NewsDetailsFactory
 {
   private const SITE_JELONKA = 'jelonka';
+  private const SITE_JG24 = 'jg24';
+  private const SITE_24JGORA = '24jgora';
 
   /**
    * Returns object SingleNews from requested site
@@ -21,7 +23,7 @@ class NewsDetailsFactory
         $news = $parser->parse($url, [Jelonka::FLAG_AUTHOR]);
         break;
       default:
-        $news = null; // should throw an error 1!!!!
+        $news = null; //TODO should throw an error !!!
     }
     return $news;
   }

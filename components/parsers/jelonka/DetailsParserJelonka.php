@@ -8,13 +8,11 @@ use DateTime;
 
 class DetailsParserJelonka extends AbstractDetailsParser
 {
-  private $xPaths = [
-      'XPATH_TITLE' => "//a[@class='wiadomosci-title']",
-      'XPATH_CONTENT' => "//div[@class='wiadomosci-contener']",
-      'XPATH_PUBDATETIME' => "//div[@class='wiadomosci-data']/strong",
-      'XPATH_UPDATEDATETIME' => "//div[@class='wiadomosci-data'][1]",
-      'XPATH_AUTHOR' => "//span[@class='autor']/span/strong",
-  ];
+  private const XPATH_TITLE = "//a[@class='wiadomosci-title']";
+  private const XPATH_CONTENT = "//div[@class='wiadomosci-contener']";
+  private const XPATH_PUBDATETIME = "//div[@class='wiadomosci-data']/strong";
+  private const XPATH_UPDATEDATETIME = "//div[@class='wiadomosci-data'][1]";
+  private const XPATH_AUTHOR = "//span[@class='autor']/span/strong";
 
   private $xPath;
   private $news;
@@ -23,7 +21,7 @@ class DetailsParserJelonka extends AbstractDetailsParser
    * @inheritdoc
    */
   protected function parseTitle() : void {
-    $title = $this->xPath->query($this->xPaths['XPATH_TITLE']);
+    $title = $this->xPath->query(self::XPATH_TITLE);
     $this->news->setTitle($title[0]->nodeValue);
   }
 
@@ -31,7 +29,7 @@ class DetailsParserJelonka extends AbstractDetailsParser
    * @inheritdoc
    */
   protected function parseContent() : void {
-    $content = $this->xPath->query($this->xPaths['XPATH_CONTENT']);
+    $content = $this->xPath->query(self::XPATH_CONTENT);
     $textContent = [];
     for ($i = 0; $i <= $content[0]->childNodes->length; $i++) {
       if (isset($content[0]->childNodes->item($i)->attributes) &&
@@ -47,7 +45,7 @@ class DetailsParserJelonka extends AbstractDetailsParser
    * @inheritdoc
    */
   protected function parsePubDateTime() : void {
-    $pubDateTime = $this->xPath->query($this->xPaths['XPATH_PUBDATETIME']);
+    $pubDateTime = $this->xPath->query(self::XPATH_PUBDATETIME);
     $this->news->setPubDateTime($this->preparePubDateTime($pubDateTime[0]->nodeValue));
   }
 
@@ -55,7 +53,7 @@ class DetailsParserJelonka extends AbstractDetailsParser
    * @inheritdoc
    */
   protected function parseAuthor() : void {
-    $author = $this->xPath->query($this->xPaths['XPATH_AUTHOR']);
+    $author = $this->xPath->query(self::XPATH_AUTHOR);
     $this->news->setAuthor($author[0]->nodeValue);
   }
 

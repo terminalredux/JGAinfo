@@ -25,7 +25,7 @@ abstract class AbstractDetailsParser
 	 *                   - parseUpdateDateTime()
 	 * Template method design pattern
 	 * @param string $url to parse
-	 * @param array $flags to choose elements to parse
+	 * @param array $flags to choose optional elements to parse
    * @return SingleNews
 	 */
 	public final function parse($url, $flags = []) : SingleNews {
@@ -47,11 +47,13 @@ abstract class AbstractDetailsParser
 	}
 
 	/**
+	 * Creates xPath, SingleNews & sets sourceLink
 	 * @param string $url to parse
 	 */
 	private function prepareParser($url) : void {
 		$this->setXPath($this->getXPath($url));
 		$this->setNews(new SingleNews());
+		$this->getNews()->setSourceLink($url);
 	}
 
 	/**
