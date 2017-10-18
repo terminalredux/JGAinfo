@@ -8,25 +8,58 @@ use DateTime;
 
 class DetailsParserJelonka extends AbstractDetailsParser
 {
+  private $xPaths = [
+      'XPATH_TITLE' => "//a[@class='wiadomosci-title']",
+      'XPATH_CONTENT' => "//div[@class='wiadomosci-contener']",
+      'XPATH_PUBDATETIME' => "//div[@class='wiadomosci-data']/strong",
+      'XPATH_UPDATEDATETIME' => "//div[@class='wiadomosci-data'][1]",
+      'XPATH_AUTHOR' => "//span[@class='autor']/span/strong",
+  ];
+
+  private $xPath;
+  private $news;
+
   /**
    * @param string $url to parse
    * @return SingleNews
    */
   public function parse($url) : SingleNews {
-    $xpath = $this->getXPath($url);
+    $this->initParser($url);
 
-    $detailNews = new SingleNews();
-
-    $title = $xpath->query("//a[@class='wiadomosci-title']");
-    $content = $xpath->query("//div[@class='wiadomosci-contener']");
-    $pubDateTime = $xpath->query("//div[@class='wiadomosci-data']/strong");
-    $updateDateTime = $xpath->query("//div[@class='wiadomosci-data'][1]");
-    $author = $xpath->query("//span[@class='autor']/span/strong");
-
+    //$updateDateTime = $xpath->query($this->xPaths['XPATH_UPDATEDATETIME']);
     //ostatnia aktualizacja:
     //if there is strong "ostatnia aktualizacja:" it means there was an update
     //trim(explode('ostatnia aktualizacja:', $updateDateTime[0]->nodeValue)[1])
 
+    $this->parseTitle();
+    $this->parseContent();
+    $this->parsePubDateTime();
+    $this->parseAuthor();
+
+    return $this->news;
+  }
+
+  /**
+   *
+   */
+  private function initParser($url) {
+    $this->xPath = $this->getXPath($url);
+    $this->news = new SingleNews();
+  }
+
+  /**
+   * @inheritdoc
+   */
+  protected function parseTitle() {
+    $title = $this->xPath->query($this->xPaths['XPATH_TITLE']);
+    $this->news->setTitle($title[0]->nodeValue);
+  }
+
+  /**
+   * @inheritdoc
+   */
+  protected function parseContent() {
+    $content = $this->xPath->query($this->xPaths['XPATH_CONTENT']);
     $textContent = [];
     for ($i = 0; $i <= $content[0]->childNodes->length; $i++) {
       if (isset($content[0]->childNodes->item($i)->attributes) &&
@@ -35,14 +68,23 @@ class DetailsParserJelonka extends AbstractDetailsParser
         $textContent[] = $content[0]->childNodes->item($i)->nodeValue;
       }
     }
+    $this->news->setContent(implode('<br><br>', $textContent));
+  }
 
-    $detailNews->setTitle($title[0]->nodeValue);
-    $detailNews->setContent(implode('<br><br>', $textContent));
-    $detailNews->setPubDateTime($this->preparePubDateTime($pubDateTime[0]->nodeValue));
-    $detailNews->setAuthor($author[0]->nodeValue);
+  /**
+   * @inheritdoc
+   */
+  protected function parsePubDateTime() {
+    $pubDateTime = $this->xPath->query($this->xPaths['XPATH_PUBDATETIME']);
+    $this->news->setPubDateTime($this->preparePubDateTime($pubDateTime[0]->nodeValue));
+  }
 
-    //var_dump($detailNews->getTitle());die;
-    return $detailNews;
+  /**
+   * @inheritdoc
+   */
+  protected function parseAuthor() {
+    $author = $this->xPath->query($this->xPaths['XPATH_AUTHOR']);
+    $this->news->setAuthor($author[0]->nodeValue);
   }
 
   /**
