@@ -3,6 +3,8 @@ namespace App\Components\Parsers\Jelonka;
 
 use App\Components\Parsers\AbstractDetailsParser;
 use App\Components\Parsers\Models\SingleNews;
+use App\Components\DateTimeHelper\DateTimeHelper;
+use DateTime;
 
 class DetailsParserJelonka extends AbstractDetailsParser
 {
@@ -36,10 +38,27 @@ class DetailsParserJelonka extends AbstractDetailsParser
 
     $detailNews->setTitle($title[0]->nodeValue);
     $detailNews->setContent(implode('<br><br>', $textContent));
-    $detailNews->setPubDateTime($pubDateTime[0]->nodeValue);
+    $detailNews->setPubDateTime($this->preparePubDateTime($pubDateTime[0]->nodeValue));
     $detailNews->setAuthor($author[0]->nodeValue);
 
     //var_dump($detailNews->getTitle());die;
     return $detailNews;
+  }
+
+  /**
+   * @inheritdoc
+   */
+  protected function preparePubDateTime($datetime) : int {
+    $tmp = explode(',', $datetime);
+    $time = ltrim($tmp[2]);
+      $hour = explode(':',$time)[0];    // leading zero
+      $minute = explode(':',$time)[1];  // leading zero
+    $date = ltrim($tmp[1]);
+      $day = explode(' ', $date)[0];    // leading zero
+      $month = explode(' ', $date)[1];  // leading zero
+      $year = explode(' ', $date)[2];
+    $date = new DateTime($year . '-' . DateTimeHelper::getMonths()[$month] . '-' . $day . 'T' . $hour . ':' . $minute . ':00');
+
+    return $date->getTimestamp();
   }
 }
