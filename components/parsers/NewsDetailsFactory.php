@@ -2,6 +2,7 @@
 namespace App\Components\Parsers;
 
 use App\Components\Parsers\Jelonka\DetailsParserJelonka as Jelonka;
+use App\Components\Parsers\Jg24\DetailsParserJG24 as JG24;
 use App\Components\Parsers\Models\SingleNews;
 
 class NewsDetailsFactory
@@ -25,6 +26,10 @@ class NewsDetailsFactory
           Jelonka::FLAG_MAIN_PHOTO,
           Jelonka::FLAG_UPDATE_DATETIME
         ]);
+        break;
+      case self::SITE_JG24:
+        $parser = new JG24();
+        $news = $parser->parse($url);
         break;
       default:
         $news = null; //TODO should throw an error !!!

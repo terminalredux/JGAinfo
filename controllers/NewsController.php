@@ -43,6 +43,8 @@ class NewsController extends Controller
       } else {
           (new ErrorController)->newsSiteNotFound($site);
       }
+    } else {
+      header('Location: ' . URL . 'news/list/' . $site);
     }
   }
 

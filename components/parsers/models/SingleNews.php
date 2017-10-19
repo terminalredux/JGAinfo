@@ -43,7 +43,7 @@ class SingleNews
     return $this->pubDateTime;
   }
 
-  public function getAuthor() : string {
+  public function getAuthor() {
     return $this->author;
   }
 
@@ -51,7 +51,7 @@ class SingleNews
     return $this->sourceLink;
   }
 
-  public function getMainPhoto(){
+  public function getMainPhoto() {
     return $this->mainPhoto;
   }
 

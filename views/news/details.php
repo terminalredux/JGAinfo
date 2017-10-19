@@ -11,8 +11,7 @@
   </p>
 <?php endif; ?>
 <?php if (!empty($this->news->getAuthor())): ?>
-  <br>
-  <small><?= $this->news->getAuthor() ?></small>
+  <small>Autor: <?= $this->news->getAuthor() ?></small>
 <?php endif; ?>
 <br><br>
 <?php if (!empty($this->news->getMainPhoto())): ?>

@@ -12,7 +12,6 @@ class DetailsParserJelonka extends AbstractDetailsParser
   private const XPATH_CONTENT = "//div[@class='wiadomosci-contener']";
   private const XPATH_PUBDATETIME = "//div[@class='wiadomosci-data']/strong";
   private const XPATH_UPDATE_DATETIME = "//div[@class='wiadomosci-data'][1]";
-  private const XPATH_UPDATEDATETIME = "//div[@class='wiadomosci-data'][1]";
   private const XPATH_AUTHOR = "//span[@class='autor']/span/strong";
   private const XPATH_MAINPHOTO = "//img[@class='wiadomosc-img']/@src";
 
