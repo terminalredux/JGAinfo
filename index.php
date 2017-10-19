@@ -16,8 +16,10 @@
 
   <script src="<?= URL ?>vendor/bower/jquery/dist/jquery.min.js"></script>
 	<script src="<?= URL ?>vendor/bower/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="<?= URL ?>vendor/bower/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="<?= URL ?>vendor/bower/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="<?= URL ?>web/css/main.css">
 
 	<link rel='shortcut icon' type='image/x-icon' href='http://www.favicon.cc/logo3d/898887.png' />
 	<link rel="stylesheet" href="/app/web/css/style.css">
