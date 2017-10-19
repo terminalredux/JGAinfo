@@ -10,6 +10,15 @@ class NewsListItem
   private $author;
   private $pubDateTime;
 
+  /**
+   * Return how many hours left when post was added
+   */
+  public function hoursLeft() : int {
+    $hours = time() - $this->pubDateTime;
+    $result = $hours / 3600;
+    return (int) $result;
+  }
+
   public function getTitle() {
     return $this->title;
   }

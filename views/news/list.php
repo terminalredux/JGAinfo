@@ -1,22 +1,26 @@
 <?php
   $currDay = date('d/m/Y');
 ?>
-<h3>Przegląd wiadomości strony <strong><?= $this->site ?></strong></h3>
+<h3><strong><?=  ucfirst($this->site) ?></strong></h3>
 <br>
 <?php foreach($this->list as $item): ?>
-  <div class="row" style="<?= $currDay == date('d/m/Y', $item->getPubDateTime()) ? 'background: #E4F1FE;' : '' ?>">
+  <div class="row news-list-item">
     <div class="col-md-2">
       <div class="text-center">
-        <?= '<img src="' . $item->getThumbnail() . '" width="150px">' ?>
+        <?= '<img src="' . $item->getThumbnail() . '" width="100px">' ?>
       </div>
     </div>
     <div class="col-md-10">
       <div class="row">
-        <h5><strong><a href="<?= $item->getLink() ?>"><?= $item->getTitle() ?></a></strong></h5>
+        <h5><strong><?= $item->getTitle() ?></strong></h5>
         <?php if (!empty($item->getAuthor())): ?>
           <small><?= $item->getAuthor() ?></small><br>
         <?php endif; ?>
-        <p><?= date('d/m/Y H:i', $item->getPubDateTime()); ?></p>
+        <?php if ($currDay == date('d/m/Y', $item->getPubDateTime())): ?>
+          <p>Dzisiaj <?= date('H:i', $item->getPubDateTime()) ?> <i class="fa fa-clock-o" aria-hidden="true"></i></p>
+        <?php else: ?>
+          <p><?= date('d/m/Y H:i', $item->getPubDateTime()) ?> <i class="fa fa-clock-o" aria-hidden="true"></i></p>
+        <?php endif; ?>
         <p><?= $item->getShortContent() ?></p>
       </div>
       <div class="row text-right">
