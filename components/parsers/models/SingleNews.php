@@ -10,8 +10,26 @@ class SingleNews
   private $author;
   private $sourceLink;
   private $mainPhoto;
-  //private $photos;
+  //private $photos; as a GalleryInterface ???
   //private ??? next object ???
+
+  /**
+   * Check first if there is more
+   * one than one paragraph
+   */
+  public function getFirtspParagraph() : string {
+    $array = explode('<br><br>', $this->content);
+    return $array[0];
+  }
+
+  /**
+   *
+   */
+  public function getRestArticle() : string {
+    $array = explode('<br><br>', $this->content);
+    unset($array[0]);
+    return implode('<br><br>', $array);
+  }
 
   public function getTitle() : string {
     return $this->title;

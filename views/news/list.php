@@ -13,13 +13,13 @@
     <div class="col-md-10">
       <div class="row">
         <h5><strong><?= $item->getTitle() ?></strong></h5>
+        <?php if ($currDay == date('d/m/Y', $item->getPubDateTime())): ?>
+          <small>Dzisiaj <?= date('H:i', $item->getPubDateTime()) ?> <i class="fa fa-clock-o" aria-hidden="true"></i></small><br>
+        <?php else: ?>
+          <small><?= date('d/m/Y H:i', $item->getPubDateTime()) ?> <i class="fa fa-clock-o" aria-hidden="true"></i></small><br>
+        <?php endif; ?>
         <?php if (!empty($item->getAuthor())): ?>
           <small><?= $item->getAuthor() ?></small><br>
-        <?php endif; ?>
-        <?php if ($currDay == date('d/m/Y', $item->getPubDateTime())): ?>
-          <p>Dzisiaj <?= date('H:i', $item->getPubDateTime()) ?> <i class="fa fa-clock-o" aria-hidden="true"></i></p>
-        <?php else: ?>
-          <p><?= date('d/m/Y H:i', $item->getPubDateTime()) ?> <i class="fa fa-clock-o" aria-hidden="true"></i></p>
         <?php endif; ?>
         <p><?= $item->getShortContent() ?></p>
       </div>
