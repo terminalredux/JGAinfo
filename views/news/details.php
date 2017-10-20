@@ -1,8 +1,10 @@
 <h3><strong><?= ucfirst($this->site) ?></strong></h3>
 <h1><?= $this->news->getTitle() ?></h1>
-<strong>
-  <?= date('d/m/Y H:i', $this->news->getPubDateTime()) ?>
-</strong>
+<p class="news_detail_pubdate">
+  <strong>
+    <?= date('d/m/Y H:i', $this->news->getPubDateTime()) ?>
+  </strong>
+</p>
 <?php if (!empty($this->news->getUpdateDateTime())): ?>
   <p>
     <small>

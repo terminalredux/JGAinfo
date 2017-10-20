@@ -11,6 +11,7 @@ class DetailsParserJgora24 extends AbstractDetailsParser
   private const XPATH_CONTENT = "//div[@class='artykul_tresc_bold']";
   private const XPATH_PUBDATETIME = "//div[@class='artykul_podtytul_data block']";
   private const XPATH_MAINPHOTO = "//div[@class='artykul_tresc_fotogl']/img/@src";
+  private const XPATH_AUTHOR = "//div[@class='artykul_autor block']/b";
 
   private $xPath;
   private $news;
@@ -46,6 +47,18 @@ class DetailsParserJgora24 extends AbstractDetailsParser
   protected function parsePubDateTime() : void {
     $pubDateTime = $this->xPath->query(self::XPATH_PUBDATETIME);
     $this->news->setPubDateTime($this->preparePubDateTime($pubDateTime[0]->nodeValue));
+  }
+
+  /**
+   * Optional element to parse
+   * Used in superclass template method parse($url, $flags)
+   * Parse and sets SingleNews author
+   */
+  protected function parseAuthor() : void {
+    $author = $this->xPath->query(self::XPATH_AUTHOR);
+    if (!empty(trim($author[0]->nodeValue))) {
+      $this->news->setAuthor($author[0]->nodeValue);
+    }
   }
 
   /**
