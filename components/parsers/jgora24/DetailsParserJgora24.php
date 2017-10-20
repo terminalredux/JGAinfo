@@ -10,6 +10,7 @@ class DetailsParserJgora24 extends AbstractDetailsParser
   private const XPATH_TITLE = "//h1[@class='artykul_tytul']";
   private const XPATH_CONTENT = "//div[@class='artykul_tresc_bold']";
   private const XPATH_PUBDATETIME = "//div[@class='artykul_podtytul_data block']";
+  private const XPATH_MAINPHOTO = "//div[@class='artykul_tresc_fotogl']/img/@src";
 
   private $xPath;
   private $news;
@@ -45,6 +46,18 @@ class DetailsParserJgora24 extends AbstractDetailsParser
   protected function parsePubDateTime() : void {
     $pubDateTime = $this->xPath->query(self::XPATH_PUBDATETIME);
     $this->news->setPubDateTime($this->preparePubDateTime($pubDateTime[0]->nodeValue));
+  }
+
+  /**
+   * Optional element to parse. Check first if in the news is a main photo
+   * Used in superclass template method parse($url, $flags)
+   * Parse and sets SingleNews mainPhoto
+   */
+  protected function parseMainPhoto() : void {
+    if ($this->xPath->evaluate(self::XPATH_MAINPHOTO)->length) {
+      $mainPhoto = $this->xPath->query(self::XPATH_MAINPHOTO);
+      $this->news->setMainPhoto(JGORA24_URL. $mainPhoto[0]->nodeValue);
+    }
   }
 
   /**

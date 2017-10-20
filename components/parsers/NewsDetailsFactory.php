@@ -36,7 +36,7 @@ class NewsDetailsFactory
         $parser = new Jgora24();
         $news = $parser->parse($url, [
           //Jgora24::FLAG_AUTHOR,
-          //Jgora24::FLAG_MAIN_PHOTO
+          Jgora24::FLAG_MAIN_PHOTO
         ]);
         break;
       default:
