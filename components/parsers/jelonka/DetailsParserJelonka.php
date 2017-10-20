@@ -8,6 +8,9 @@ use DateTime;
 
 class DetailsParserJelonka extends AbstractDetailsParser
 {
+  //http://rykowisko.jelonka.com/nadgorliwosc-gorsza-od-71502.html
+  // Czasami jest na liście newsów RYKOWISKO
+  //I wtedy wypierdala błąd
   private const XPATH_TITLE = "//a[@class='wiadomosci-title']";
   private const XPATH_CONTENT = "//div[@class='wiadomosci-contener']";
   private const XPATH_PUBDATETIME = "//div[@class='wiadomosci-data']/strong";

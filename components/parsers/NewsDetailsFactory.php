@@ -3,6 +3,7 @@ namespace App\Components\Parsers;
 
 use App\Components\Parsers\Jelonka\DetailsParserJelonka as Jelonka;
 use App\Components\Parsers\Jg24\DetailsParserJG24 as JG24;
+use App\Components\Parsers\Jgora24\DetailsParserJG24 as Jgora24;
 use App\Components\Parsers\Models\SingleNews;
 
 class NewsDetailsFactory
@@ -30,6 +31,13 @@ class NewsDetailsFactory
       case self::SITE_JG24:
         $parser = new JG24();
         $news = $parser->parse($url);
+        break;
+      case self::SITE_24JGORA:
+        $parser = new Jgora24();
+        $news = $parser->parse($url, [
+          Jgora24::FLAG_AUTHOR,
+          Jgora24::FLAG_MAIN_PHOTO
+        ]);
         break;
       default:
         $news = null; //TODO should throw an error !!!
