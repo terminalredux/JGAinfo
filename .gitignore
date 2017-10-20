@@ -1,4 +1,4 @@
 # Bower shit
 /vendor/bower
 # OpenWeatherMap API keys
-/components/config/api_keys.php
+/config/api_keys.php
