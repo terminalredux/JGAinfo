@@ -14,20 +14,24 @@ class NewsController extends Controller
   }
 
   public function actionIndex() {
-    $this->view->render('news/index');
+    header('Location: ' . URL . 'site');
   }
 
   /**
    * @param string $site
    */
-  public function actionList($site) {
-    $this->view->site = $site;
-    $this->view->list = NewsListFactory::create($site);
+  public function actionList($site = null) {
+    if ($site) {
+      $this->view->site = $site;
+      $this->view->list = NewsListFactory::create($site);
 
-    if (!empty($this->view->list)) {
-      $this->view->render('news/list');
+      if (!empty($this->view->list)) {
+        $this->view->render('news/list');
+      } else {
+          (new ErrorController)->newsSiteNotFound($site);
+      }
     } else {
-        (new ErrorController)->newsSiteNotFound($site);
+      header('Location: ' . URL . 'site');
     }
   }
 
