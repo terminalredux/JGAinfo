@@ -3,22 +3,9 @@ namespace App\Components\OpenWeatherMap;
 
 class OpenWeatherMap
 {
-  private static $instance = false;
-  private static $data;
-  private static $random;
+  private $data;
 
-  /**
-   * Singleton design pattern
-   * @return OpenWeatherMap object
-   */
-  public static function getInstance() {
-    if (self::$instance == false) {
-      self::$instance = new OpenWeatherMap();
-    }
-    return self::$instance;
-  }
-
-  private function __construct() {
+  public function __construct() {
     $url = sprintf(OPEN_WEATHER_MAP_URL, OPEN_WEATHER_MAP_JG_ID, OPEN_WEATHER_MAP_API_KEY);
     $ch = curl_init();
     curl_setopt($ch,CURLOPT_URL,$url);
@@ -30,14 +17,9 @@ class OpenWeatherMap
     }
     curl_close($ch);
     $this->data = json_decode($json);
-    $this->random = rand(10,10000);
   }
 
   public function getData() {
     return $this->data;
-  }
-
-  public function getRandom() {
-    return $this->random;
   }
 }
