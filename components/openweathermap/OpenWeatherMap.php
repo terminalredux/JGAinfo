@@ -81,6 +81,6 @@ class OpenWeatherMap
   }
 
   /**
-   *
+   * TODO rain, storm, snow.....
    */
 }
