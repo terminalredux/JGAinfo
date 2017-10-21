@@ -28,7 +28,7 @@ class OpenWeatherMap
   }
 
   public function windSpeed() : string {
-    return $this->data->wind->speed . ' km/h';
+    return $this->convertWindSpeed($this->data->wind->speed) . ' km/h';
   }
 
   /**
@@ -68,4 +68,19 @@ class OpenWeatherMap
       return round(($temp - 273.15));
     }
   }
+
+  /**
+   * Convert wind speed from metre
+   * per second to km per hour
+   * @param float $speed
+   */
+  private function convertWindSpeed($speed) : float {
+    if (is_numeric($speed)) {
+      return number_format(($speed * 3600) / 1000, 1);
+    }
+  }
+
+  /**
+   *
+   */
 }

@@ -14,6 +14,7 @@ $weather = new OpenWeatherMap();
     <i class="fa fa-star" aria-hidden="true"></i> Zachód: <?= $weather->sunset() ?> <br>
     <i class="fa fa-star" aria-hidden="true"></i> Ciśnienie: <?= $weather->pressure() ?> <br>
     <i class="fa fa-star" aria-hidden="true"></i> Ciśnienie: <?= $weather->clouds() ?> <br>
+    <h1>Wind speed <?= $weather->windSpeed() ?></h1>
 
   </div>
 </div>
