@@ -10,9 +10,9 @@
         <a class="navbar-brand" href="<?= URL ?>site">JGA info</a>
       </div>
       <ul class="nav navbar-nav">
-        <li><a href="<?= URL ?>news/list/jelonka">jelonka.com</a></li>
-        <li><a href="<?= URL ?>news/list/jg24">jg24.pl</a></li>
-        <li><a href="<?= URL ?>news/list/24jgora">24jgora.pl</a></li>
+        <li><a href="<?= URL ?>news/list/jelonka"><i class="fa fa-rss" aria-hidden="true"></i> jelonka.com</a></li>
+        <li><a href="<?= URL ?>news/list/jg24"><i class="fa fa-rss" aria-hidden="true"></i> jg24.pl</a></li>
+        <li><a href="<?= URL ?>news/list/24jgora"><i class="fa fa-rss" aria-hidden="true"></i> 24jgora.pl</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <?php if (Session::get('logged')): ?>
