@@ -21,5 +21,17 @@ body {
 }
 /* Weather */
 .weather-img {
-  width: 100px;
+  width: 50px;
+  float: left;
+}
+.weather-group p {
+  display: block;
+  float: left;
+  line-height: 50px;
+  font-size: 1em;
+  margin-left: 0.5em;
+}
+.weather-group p span {
+  font-size: 1.3em;
+  font-weight: bold; 
 }
