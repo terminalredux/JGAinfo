@@ -19,3 +19,7 @@ body {
 }
 .detail-news-content {
 }
+/* Weather */
+.weather-img {
+  width: 100px;
+}

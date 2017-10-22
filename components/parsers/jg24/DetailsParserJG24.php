@@ -31,8 +31,7 @@ class DetailsParserJG24 extends AbstractDetailsParser
     $textContent = [];
     for ($i = 0; $i < $content[0]->childNodes->length; $i++) {
       $node = $content[0]->childNodes->item($i);
-      // 3 means TEXT NODE
-      if ($node->nodeType == 3 && !empty(trim($node->wholeText))) {
+      if ($node->nodeType == XML_TEXT_NODE && !empty(trim($node->wholeText))) {
         $textContent[] = trim($node->wholeText);
       }
     }

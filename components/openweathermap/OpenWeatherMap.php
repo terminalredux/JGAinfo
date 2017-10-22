@@ -14,6 +14,7 @@ class OpenWeatherMap
     $json = curl_exec($ch);
     if(!$json) {
         echo curl_error($ch);
+        //TODO better error handler
     }
     curl_close($ch);
     $this->data = json_decode($json);
@@ -23,8 +24,19 @@ class OpenWeatherMap
    * @return string source to image representation
    */
   public function weatherImg() : string {
-    //TODO
-    return 'sdg';
+    $img =  URL . 'web/img/';
+    $clouds = $this->data->clouds->all;
+
+    if ($clouds >= 0 && $clouds <= 10) {
+      $img .= '050-sun.png';
+    } else if ($clouds >= 11 && $clouds <= 50) {
+      $img .= '003-cloudy-4.png';
+    } else if ($clouds >= 51 && $clouds <= 89) {
+      $img .= '005-cloudy-3.png';
+    } else if ($clouds >= 90 && $clouds <= 100) {
+      $img .= '049-clouds.png';
+    }
+    return $img;
   }
 
   public function windSpeed() : string {
