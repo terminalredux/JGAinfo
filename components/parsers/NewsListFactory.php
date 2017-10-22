@@ -1,9 +1,11 @@
 <?php
 namespace App\Components\Parsers;
 
-use App\Components\Parsers\Jelonka\ListParserJelonka;
-use App\Components\Parsers\Jg24\ListParserJG24;
-use App\Components\Parsers\Jgora24\ListParserJgora24;
+use App\Components\Parsers\{
+  Jelonka\ListParserJelonka,
+  Jg24\ListParserJG24,
+  Jgora24\ListParserJgora24
+};
 
 class NewsListFactory
 {

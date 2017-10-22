@@ -1,10 +1,12 @@
 <?php
 namespace App\Components\Parsers;
 
-use App\Components\Parsers\Jelonka\DetailsParserJelonka as Jelonka;
-use App\Components\Parsers\Jg24\DetailsParserJG24 as JG24;
-use App\Components\Parsers\Jgora24\DetailsParserJgora24 as Jgora24;
-use App\Components\Parsers\Models\SingleNews;
+use App\Components\Parsers\{
+  Jelonka\DetailsParserJelonka as Jelonka,
+  Jg24\DetailsParserJG24 as JG24,
+  Jgora24\DetailsParserJgora24 as Jgora24,
+  Models\SingleNews
+};
 
 class NewsDetailsFactory
 {
