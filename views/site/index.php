@@ -42,6 +42,7 @@ $weather = new OpenWeatherMap();
     <div class="row">
       <div class="col-md-6">
         <div class="weather-group">
+          <img src="<?= URL . 'web/img/pressure.png' ?>" alt="pogoda" title="pogoda" class="weather-img">
           <p>Ciśnienie: <span><?= $weather->pressure() ?></span></p>
         </div>
       </div>

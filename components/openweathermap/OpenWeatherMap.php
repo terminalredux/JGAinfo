@@ -56,7 +56,7 @@ class OpenWeatherMap
   }
 
   public function pressure() : string {
-    return $this->data->main->pressure . ' hPa';
+    return round($this->data->main->pressure, 1) . ' hPa';
   }
 
   public function temp() : string {
